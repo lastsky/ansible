@@ -1,0 +1,22 @@
+---
+- hosts: all
+  become: no
+  become_method: sudo
+  vars:
+   ini_true: true
+   ini_false: false
+
+  tasks:
+   - name: tune mc not by hands as 1000x times
+     ini_file: dest=~/.config/mc/ini
+               section={{ item.section }}
+               option={{ item.option }}
+               value={{ item.value }}
+               backup=yes
+     with_items:
+       - { section: Midnight-Commander, option: use_internal_view, value: 1 }
+       - { section: Midnight-Commander, option: use_internal_edit, value: 0 }
+       - { section: Midnight-Commander, option: confirm_delete, value: 0 }
+       - { section: Midnight-Commander, option: confirm_exit, value: 0 }
+       - { section: Layout, option: message_visible, value: 0 }
+       - { section: Panels, option: navigate_with_arrows, value: "{{ ini_true | bool | lower }}" }
