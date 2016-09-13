@@ -12,7 +12,6 @@
                section={{ item.section }}
                option={{ item.option }}
                value={{ item.value }}
-               backup=yes
      with_items:
        - { section: Midnight-Commander, option: use_internal_view, value: 1 }
        - { section: Midnight-Commander, option: use_internal_edit, value: 0 }
