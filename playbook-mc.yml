@@ -13,6 +13,7 @@
                option={{ item.option }}
                value={{ item.value }}
      with_items:
+       - { section: Midnight-Commander, option: auto_save_setup_panels, value: 1 }
        - { section: Midnight-Commander, option: use_internal_view, value: 1 }
        - { section: Midnight-Commander, option: use_internal_edit, value: 0 }
        - { section: Midnight-Commander, option: confirm_delete, value: 0 }
