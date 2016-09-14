@@ -7,7 +7,7 @@
    ini_false: false
 
   tasks:
-   - name: tune mc not by hands as 1000x times
+   - name: tune mc and be god
      ini_file: dest=~/.config/mc/ini
                section={{ item.section }}
                option={{ item.option }}
