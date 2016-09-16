@@ -7,6 +7,10 @@
    ini_false: false
 
   tasks:
+   - name: check if ini exist
+     stat: path=~/.config/mc/ini
+     register: mc_ini_exist
+
    - name: tune mc and be god
      ini_file: dest=~/.config/mc/ini
                section={{ item.section }}
