@@ -25,3 +25,4 @@
        - { section: Midnight-Commander, option: confirm_exit, value: 0 }
        - { section: Layout, option: message_visible, value: 0 }
        - { section: Panels, option: navigate_with_arrows, value: "{{ ini_true | bool | lower }}" }
+       - { section: Panels, option: fast_reload, value: "{{ ini_true | bool | lower }}" }
