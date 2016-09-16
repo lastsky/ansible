@@ -9,9 +9,10 @@
   tasks:
    - name: check if ini exist
      stat: path=~/.config/mc/ini
-     register: mc_ini_exist
+     register: mc_ini
 
    - name: tune mc and be god
+     when: mc_ini.stat.exists == True
      ini_file: dest=~/.config/mc/ini
                section={{ item.section }}
                option={{ item.option }}
