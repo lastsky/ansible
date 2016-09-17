@@ -1,15 +1,16 @@
 ---
 - hosts: all
-  become: no
-  become_method: sudo
   vars:
    ini_true: true
    ini_false: false
-
   tasks:
    - name: check if ini exist
      stat: path=~/.config/mc/ini
      register: mc_ini
+
+   - name: norify
+     when: mc_ini.stat.exists == False
+     debug: msg="you'd forgot to run mc your very first time" 
 
    - name: tune mc and be god
      when: mc_ini.stat.exists == True
