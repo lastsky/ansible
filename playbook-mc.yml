@@ -8,7 +8,7 @@
      stat: path=~/.config/mc/ini
      register: mc_ini
 
-   - name: norify
+   - name: notify
      when: mc_ini.stat.exists == False
      debug: msg="you'd forgot to run mc your very first time" 
 
