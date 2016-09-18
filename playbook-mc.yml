@@ -14,7 +14,7 @@
 
    - name: tune mc and be god
      when: mc_ini.stat.exists == True
-     ini_file: dest=~/.config/mc/ini
+     ini_file: dest=~/.config/mc/ini no_extra_spaces=yes
                section={{ item.section }}
                option={{ item.option }}
                value={{ item.value }}
@@ -23,7 +23,7 @@
        - { section: Midnight-Commander, option: auto_save_setup_panels, value: 1 }
        - { section: Midnight-Commander, option: use_internal_view, value: 1 }
        - { section: Midnight-Commander, option: use_internal_edit, value: 0 }
-       - { section: Midnight-Commander, option: confirm_delete, value: 0 }
+       - { section: Midnight-Commander, option: confirm_delete, value: 1 }
        - { section: Midnight-Commander, option: confirm_exit, value: 0 }
        - { section: Layout, option: message_visible, value: 0 }
        - { section: Panels, option: navigate_with_arrows, value: "{{ ini_true | bool | lower }}" }
