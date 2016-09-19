@@ -26,5 +26,6 @@
        - { section: Midnight-Commander, option: confirm_delete, value: 0 }
        - { section: Midnight-Commander, option: confirm_exit, value: 0 }
        - { section: Layout, option: message_visible, value: 0 }
+       - { section: Layout, option: menubar_visible, value: 1 }
        - { section: Panels, option: navigate_with_arrows, value: "{{ ini_true | bool | lower }}" }
        - { section: Panels, option: fast_reload, value: "{{ ini_true | bool | lower }}" }
