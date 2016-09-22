@@ -12,6 +12,7 @@
      when: mc_ini.stat.exists == False
      # TODO: Why not use shell module to run mc in some clever way so it
      # TODO: would create the ini and exit then?
+     # TODO: Solaris and FreeBSD support. INI file should be taken from original repo.
      debug: msg="mc.ini does not exist; run mc to create defaults first" 
 
    - name: tune mc and be god
