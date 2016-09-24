@@ -9,12 +9,10 @@
      register: mc_ini
 
    - name: make path for ini
-     when: mc_ini.stat.exists == False
      file: path=~/.config/mc state=directory
 
    - name: copy ini if absent
      when: mc_ini.stat.exists == False
-     # TODO: Solaris and FreeBSD support. INI file should be taken from original repo.
      copy: src=mc.ini dest=~/.config/mc/ini
 
    - name: tune mc and be god
