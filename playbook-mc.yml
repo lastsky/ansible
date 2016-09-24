@@ -8,12 +8,14 @@
      stat: path=~/.config/mc/ini
      register: mc_ini
 
-   - name: notify if ini absent
+   - name: make path for ini
      when: mc_ini.stat.exists == False
-     # TODO: Why not use shell module to run mc in some clever way so it
-     # TODO: would create the ini and exit then?
+     file: path=~/.config/mc state=directory
+
+   - name: copy ini if absent
+     when: mc_ini.stat.exists == False
      # TODO: Solaris and FreeBSD support. INI file should be taken from original repo.
-     debug: msg="mc.ini does not exist; run mc to create defaults first" 
+     copy: src=mc.ini dest=~/.config/mc/ini
 
    - name: tune mc and be god
      when: mc_ini.stat.exists == True
