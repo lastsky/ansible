@@ -15,7 +15,7 @@
      when: mc_ini.stat.exists == False
      copy: src=mc.ini dest=~/.config/mc/ini
 
-   - name: tune mc and be god
+   - name: tune mc with your favourite settings
      when: mc_ini.stat.exists == True
      ini_file: dest=~/.config/mc/ini no_extra_spaces=yes
                section={{ item.section }}
@@ -24,6 +24,7 @@
      with_items:
        - { section: Midnight-Commander, option: mcview_remember_file_position, value: 1 }
        - { section: Midnight-Commander, option: auto_save_setup_panels, value: 1 }
+       - { section: Midnight-Commander, option: classic_progressbar, value: 0 }
        - { section: Midnight-Commander, option: use_internal_view, value: 0 }
        - { section: Midnight-Commander, option: use_internal_edit, value: 0 }
        - { section: Midnight-Commander, option: confirm_delete, value: 0 }
