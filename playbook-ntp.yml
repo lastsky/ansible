@@ -4,7 +4,7 @@
   become_method: sudo
   tasks:
    - name: restrict ntpd listen addresses
-     lineinfile: dest=/etc/ntp.conf regexp="{{ item.regexp }}" line="{{ item.line }}"
+     lineinfile: dest=/etc/ntp.conf regexp="{{ item.regexp }}" line="{{ item.line }}" backup=yes
      with_items:
        - { regexp: '^interface ignore', line: 'interface ignore wildcard' }
        - { regexp: '^interface listen 127.0.0.1', line: 'interface listen 127.0.0.1' }
