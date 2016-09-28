@@ -1,0 +1,12 @@
+---
+- hosts: all
+  vars:
+    internal_domain: example.org
+  tasks:
+   - name: setting hostname from inventory
+     hostname: name="{{ inventory_hostname }}.{{ internal_domain }}"
+
+   - name: generate dynamic hosts from inventory
+     lineinfile: dest=/etc/hosts regexp='.*{{ item }}$' line="{{ hostvars[item].ansible_default_ipv4.address }} {{item}}" state=present
+     when: hostvars[item].ansible_default_ipv4.address is defined
+     with_items: groups['all']
