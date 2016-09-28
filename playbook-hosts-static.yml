@@ -1,0 +1,20 @@
+---
+- hosts: all
+  vars:
+    internal_domain: example.org
+  tasks:
+   - name: setting hostname from inventory
+     hostname: name="{{ inventory_hostname }}.{{ internal_domain }}"
+
+   - name: generate static hosts as defined
+     blockinfile:
+       dest: /etc/hosts
+       block: |
+         10.64.32.1     database-master    database-master.{{ internal_domain }}
+         10.64.64.1     database-backup    database-backup.{{ internal_domain }}
+         10.64.128.10   monitor-server-1   monitor-server-1.{{ internal_domain }}
+         10.64.228.10   monitor-server-2   monitor-server-2.{{ internal_domain }}
+         10.64.128.20   rsyslog-server-1   rsyslog-server-1.{{ internal_domain }}
+         10.64.228.20   rsyslog-server-2   rsyslog-server-2.{{ internal_domain }}
+         10.64.128.20   ssh-proxy-host-1   ssh-proxy-host-1.{{ internal_domain }}
+         10.64.228.20   ssh-proxy-host-2   ssh-proxy-host-2.{{ internal_domain }}
