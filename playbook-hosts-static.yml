@@ -2,10 +2,8 @@
 - hosts: all
   vars:
     internal_domain: example.org
-  tasks:
-   - name: setting hostname from inventory
-     hostname: name="{{ inventory_hostname }}.{{ internal_domain }}"
 
+  tasks:
    - name: generate static hosts as defined
      blockinfile:
        dest: /etc/hosts
