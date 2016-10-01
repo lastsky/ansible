@@ -26,7 +26,7 @@
        - { section: Midnight-Commander, option: classic_progressbar, value: 0 }
        - { section: Midnight-Commander, option: use_internal_view, value: 0 }
        - { section: Midnight-Commander, option: use_internal_edit, value: 0 }
-       - { section: Midnight-Commander, option: confirm_delete, value: 0 }
+       - { section: Midnight-Commander, option: confirm_delete, value: 1 }
        - { section: Midnight-Commander, option: confirm_exit, value: 0 }
        - { section: Layout, option: message_visible, value: 0 }
        - { section: Layout, option: menubar_visible, value: 1 }
