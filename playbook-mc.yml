@@ -24,7 +24,7 @@
        - { section: Midnight-Commander, option: mcview_remember_file_position, value: 1 }
        - { section: Midnight-Commander, option: auto_save_setup_panels, value: 1 }
        - { section: Midnight-Commander, option: classic_progressbar, value: 0 }
-       - { section: Midnight-Commander, option: use_internal_view, value: 0 }
+       - { section: Midnight-Commander, option: use_internal_view, value: 1 }
        - { section: Midnight-Commander, option: use_internal_edit, value: 0 }
        - { section: Midnight-Commander, option: confirm_delete, value: 1 }
        - { section: Midnight-Commander, option: confirm_exit, value: 0 }
