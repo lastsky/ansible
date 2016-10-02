@@ -10,6 +10,5 @@
      notify: restart ntpd
 
   handlers:
-    - name: restart ntpd
+          - name: start and auto-start ntpd
       action: service name=ntpd state=restarted enabled=true
-
