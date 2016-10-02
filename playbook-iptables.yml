@@ -1,1 +1,14 @@
 ---
+- hosts: all
+  tasks:
+    - name: accept already established flows
+      iptables: chain=INPUT ctstate=ESTABLISHED,RELATED jump=ACCEPT
+
+    - name: accept new http flows
+      iptables: chain=INPUT protocol=tcp match=tcp destination_port=80 jump=ACCEPT
+
+    - name: accept new ssh flows
+      iptables: chain=INPUT protocol=udp match=udp destination_port=22 jump=ACCEPT
+
+    - name: set default chain policy to drop
+      iptables: chain=INPUT policy=DROP
