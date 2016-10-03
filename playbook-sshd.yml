@@ -1,0 +1,18 @@
+---
+- hosts: all
+  tasks:
+    - name: do not allow root login via ssh
+      lineinfile: backrefs=yes dest=/etc/ssh/sshd_config regexp="^PermitRootLogin yes"line="PermitRootLogin no"
+      notify: reload sshd
+
+    - name: do not allow password auth via ssh
+      lineinfile: backrefs=yes dest=/etc/ssh/sshd_config regexp="#PasswordAuthentication yes" line="PasswordAuthentication no"
+      notify: reload sshd
+
+    - name: do not allow use pam via ssh
+      lineinfile: backrefs=yes dest=/etc/ssh/sshd_config regexp="^UsePAM yes" line="UsePAM no"
+      notify: reload sshd
+  
+    handlers:
+      - name: reload sshd
+        service: name=sshd state=restarted enabled=true
