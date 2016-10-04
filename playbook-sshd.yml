@@ -12,7 +12,11 @@
     - name: do not allow use pam via ssh
       lineinfile: backrefs=yes dest=/etc/ssh/sshd_config regexp="^UsePAM yes" line="UsePAM no"
       notify: reload sshd
-  
+
+    - name: restrict listening interface
+      lineinfile: dest=/etc/ssh/sshd_config regexp="^ListenAddress {{ hostvars[host].ansible_default_ipv4.address }}" state=present
+      notify: reload sshd
+
   handlers:
     - name: reload sshd
       service: name=sshd state=restarted enabled=true
