@@ -13,6 +13,6 @@
       lineinfile: backrefs=yes dest=/etc/ssh/sshd_config regexp="^UsePAM yes" line="UsePAM no"
       notify: reload sshd
   
-    handlers:
-      - name: reload sshd
-        service: name=sshd state=restarted enabled=true
+  handlers:
+    - name: reload sshd
+      service: name=sshd state=restarted enabled=true
