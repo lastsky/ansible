@@ -14,7 +14,7 @@
       notify: reload sshd
 
     - name: restrict listening interface
-      lineinfile: dest=/etc/ssh/sshd_config regexp="^ListenAddress {{ hostvars[host].ansible_default_ipv4.address }}" state=present
+      lineinfile: dest=/etc/ssh/sshd_config regexp="^ListenAddress {{ ansible_host }}" state=present
       notify: reload sshd
 
   handlers:
