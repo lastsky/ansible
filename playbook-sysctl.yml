@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become: true
+  become_method: sudo
+          
+  sysctl_settings:
+    net.ipv4.ip_local_port_range: "1024 65000"
+    vm.swappiness: "0"
+
+  tasks:
+    - name: set sysctl settings
+      sysctl:
+        name="{{ item.key }}" value="{{ item.value }}"
+        sysctl_set=yes state=present reload=yes
+      with_dict: "{{ sysctl_settings }}"
