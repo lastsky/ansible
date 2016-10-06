@@ -1,6 +1,8 @@
 ---
 - hosts: all
-  gather_facts: yes
+  become: yes
+  become_user: root
+  become_method: sudo
 
 - include: playbook-hostname.yml
 - include: playbook-hosts-dynamic.yml
