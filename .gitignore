@@ -1,6 +1,5 @@
 .DS_Store
 .idea
 .vagrant/
-Vagrantfile
 *.retry
 .vault-pass
