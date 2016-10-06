@@ -1,0 +1,12 @@
+---
+- hosts: all
+  gather_facts: yes
+
+- include: playbook-hostname.yml
+- include: playbook-hosts-dynamic.yml
+- include: playbook-hosts-static.yml
+- include: playbook-iptables.yml
+- include: playbook-mc.yml
+- include: playbook-ntp.yml
+- include: playbook-sshd.yml
+- include: playbook-sysctl.yml
