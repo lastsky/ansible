@@ -7,7 +7,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :ansible do |ansible|
     ansible.playbook = "playbook-all.yml"
     ansible.vault_password_file = ".vault-pass"
-    ansible.verbose = 'vv'
+    ansible.verbose = 'vvvvvvvv'
     ansible.groups = {
      "hardware" => ["default"]
     }
