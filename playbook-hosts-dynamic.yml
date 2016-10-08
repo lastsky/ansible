@@ -1,6 +1,7 @@
 #TODO: {{ item }} with {{ internal_domain }} is not idempotent
 ---
 - hosts: all
+  become: true
   vars:
     internal_domain: example.org
   tasks:
