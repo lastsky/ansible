@@ -1,5 +1,6 @@
 ---
 - hosts: all
+  become: true
   tasks:
     - name: accept already established flows
       iptables: chain=INPUT ctstate=ESTABLISHED,RELATED comment="active flows" jump=ACCEPT
@@ -10,5 +11,6 @@
     - name: accept new ssh flows
       iptables: chain=INPUT protocol=tcp match=tcp destination_port=22 comment="ssh access" jump=ACCEPT
 
-    - name: set default chain policy to drop
-      iptables: chain=INPUT policy=DROP
+#   # wait for ansible 2.2 lol
+#   - name: set default chain policy to drop
+#     iptables: chain=INPUT policy=DROP
