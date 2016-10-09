@@ -1,14 +1,16 @@
 ---
 - hosts: all
+  become: true
+  gather_facts: yes
   tasks:
-   - name: restrict ntpd listen addresses
-     lineinfile: dest=/etc/ntp.conf regexp="{{ item.regexp }}" line="{{ item.line }}" backup=yes
-     with_items:
-       - { regexp: '^interface ignore', line: 'interface ignore wildcard' }
-       - { regexp: '^interface listen 127.0.0.1', line: 'interface listen 127.0.0.1' }
-       - { regexp: '^interface listen {{ ansible_host }}', line: 'interface listen {{ ansible_host }}' }
-     notify: restart ntpd
+    - name: restrict ntpd listen addresses
+      lineinfile: dest=/etc/ntp.conf regexp="{{ item.regexp }}" line="{{ item.line }}" backup=yes
+      with_items:
+        - { regexp: '^interface ignore', line: 'interface ignore wildcard' }
+        - { regexp: '^interface listen 127.0.0.1', line: 'interface listen 127.0.0.1' }
+  #        - { regexp: '^interface listen {{  hostvars[host].ansible_default_ipv4.address }}', line: 'interface listen {{  hostvars[host].ansible_default_ipv4.address }}' }
+      notify: restart ntpd
 
   handlers:
-     - name: start and auto-start ntpd
+     - name: restart ntpd
        action: service name=ntpd state=restarted enabled=true
