@@ -1,20 +1,21 @@
 ---
 - hosts: all
+  become: true
   tasks:
     - name: do not allow root login via ssh
-      lineinfile: backrefs=yes dest=/etc/ssh/sshd_config regexp="^PermitRootLogin yes"line="PermitRootLogin no"
+      lineinfile: backrefs=yes state=present dest=/etc/ssh/sshd_config regexp="^PermitRootLogin yes" line="PermitRootLogin no"
       notify: reload sshd
 
     - name: do not allow password auth via ssh
-      lineinfile: backrefs=yes dest=/etc/ssh/sshd_config regexp="#PasswordAuthentication yes" line="PasswordAuthentication no"
+      lineinfile: backrefs=yes state=present dest=/etc/ssh/sshd_config regexp="#PasswordAuthentication yes" line="PasswordAuthentication no"
       notify: reload sshd
 
     - name: do not allow use pam via ssh
-      lineinfile: backrefs=yes dest=/etc/ssh/sshd_config regexp="^UsePAM yes" line="UsePAM no"
+      lineinfile: backrefs=yes state=present dest=/etc/ssh/sshd_config regexp="^UsePAM yes" line="UsePAM no"
       notify: reload sshd
 
     - name: restrict listening interface
-      lineinfile: dest=/etc/ssh/sshd_config regexp="^ListenAddress {{ ansible_host }}" state=present
+      lineinfile: state=present dest=/etc/ssh/sshd_config regexp="^ListenAddress {{ ansible_host }}" line="ListenAddress {{ ansible_host }}"
       notify: reload sshd
 
   handlers:
