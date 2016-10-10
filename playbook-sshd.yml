@@ -16,6 +16,7 @@
 
     - name: restrict listening interface
       lineinfile: state=present dest=/etc/ssh/sshd_config regexp="^ListenAddress {{ ansible_host }}" line="ListenAddress {{ ansible_host }}"
+      when: ansible_host != "127.0.0.1"
       notify: reload sshd
 
   handlers:

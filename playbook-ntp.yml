@@ -3,6 +3,9 @@
   become: true
   gather_facts: yes
   tasks:
+    - name: install ntpd if absent
+      yum: name=ntp state=present
+   
     - name: restrict ntpd listen addresses
       lineinfile: dest=/etc/ntp.conf regexp="{{ item.regexp }}" line="{{ item.line }}" backup=yes
       with_items:
