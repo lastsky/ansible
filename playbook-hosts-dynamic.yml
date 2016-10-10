@@ -1,7 +1,9 @@
 #TODO: {{ item }} with {{ internal_domain }} is not idempotent
 ---
 - hosts: all
-  become: true
+  become: yes
+  become_user: root
+  become_method: sudo
   vars:
     internal_domain: example.org
   tasks:
