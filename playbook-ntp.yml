@@ -1,17 +1,19 @@
 ---
 - hosts: all
-  become: true
-  gather_facts: yes
+  become: yes
+  become_user: root
+  become_method: sudo
+
   tasks:
     - name: install ntpd if absent
       yum: name=ntp state=present
    
     - name: restrict ntpd listen addresses
-      lineinfile: dest=/etc/ntp.conf regexp="{{ item.regexp }}" line="{{ item.line }}" backup=yes
+      lineinfile: dest=/etc/ntp.conf regexp="{{ item.regexp }}" line="{{ item.line }}" backup=yes state=present
       with_items:
         - { regexp: '^interface ignore', line: 'interface ignore wildcard' }
         - { regexp: '^interface listen 127.0.0.1', line: 'interface listen 127.0.0.1' }
-  #        - { regexp: '^interface listen {{  hostvars[host].ansible_default_ipv4.address }}', line: 'interface listen {{  hostvars[host].ansible_default_ipv4.address }}' }
+        - { regexp: '^interface listen {{ ansible_default_ipv4.address }}', line: 'interface listen {{ ansible_default_ipv4.address }}' }
       notify: restart ntpd
 
   handlers:
