@@ -1,6 +1,9 @@
 ---
 - hosts: all
-  become: true
+  become: yes
+  become_user: root
+  become_method: sudo
+
   vars:          
     sysctl_settings:
       net.ipv4.ip_forward: 1
