@@ -1,6 +1,7 @@
 #TODO: centos/rhel/ubuntu/debian work
 #TODO: ipv6tables
 #TODO: ssh-keys
+#TODO: hosts - {{ item }} with {{ internal_domain }} is not idempotent
 ---
 - hosts: all
   become: yes
