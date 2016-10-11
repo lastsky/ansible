@@ -1,3 +1,6 @@
+#TODO: centos/rhel/ubuntu/debian work
+#TODO: ipv6tables
+#TODO: ssh-keys
 ---
 - hosts: all
   become: yes
