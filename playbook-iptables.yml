@@ -15,7 +15,3 @@
 
     - name: block all other flows
       iptables: chain=INPUT jump=DROP
-
-#   # wait for ansible 2.2 lol
-#   - name: set default chain policy to drop
-#     iptables: chain=INPUT policy=DROP
