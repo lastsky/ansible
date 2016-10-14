@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
+
+  tasks:
+   - name: configure dns resolving
+     lineinfile: dest=/etc/resolv.conf regexp="{{ item.regexp }}" line="{{ item.line }}" backup=yes
+     with_items:
+       - { regexp: ^nameserver 8.8.8.8, line: "nameserver 8.8.8.8" }
+       - { regexp: ^nameserver 8.8.4.4, line: "nameserver 8.8.4.4" }
