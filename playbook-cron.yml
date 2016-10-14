@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: true
+  become_method: sudo
+
+  tasks:
+    - name: sync filesystem as example
+      cron:
+        hour: 12
+        minute: 00
+        name: "sync filesystem"
+        cron_file: sync
+        user: root
+        job: "sync"
