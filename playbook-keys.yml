@@ -6,23 +6,31 @@
   vars:
     user_items:
      - name: user1
-       key: "ssh-rsa AAAAB3NzaC1yc....snip...oij2==  user1@example.org"
+       uuid: 2001
+       shell: sh
+       ssh_key: "ssh-rsa AAAAB3NzaC1yc....snip...oij2==  user1@example.org"
      - name: user2
-       key: "ssh-rsa AAAAB3NzaC1yc....snip...adv0==  user2@example.org" 
+       uuid: 2002
+       shell: bash
+       ssh_key: "ssh-rsa AAAAB3NzaC1yc....snip...adv0==  user2@example.org"
      - name: user3
-       key: "ssh-rsa AAAAB3NzaC1yc....snip...asj5==  user3@example.org"
+       uuid: 2003
+       shell: bash
+       ssh_key: "ssh-rsa AAAAB3NzaC1yc....snip...asj5==  user3@example.org"
      - name: user4
-       key: "ssh-rsa AAAAB3NzaC1yc....snip...102n==  user4@example.org"
+       uuid: 2004
+       shell: bash
+       ssh_key: "ssh-rsa AAAAB3NzaC1yc....snip...102n==  user4@example.org"
 
   tasks:
     - name: add user
-      user: name={{ item.name }} shell=/bin/bash groups=root append=yes
+      user: name={{ item.name }} shell={{ item.shell }} uid={{ item.uuid }} groups=root append=yes
       with_items: "{{ user_items }}"
 
     - name: add ssh-keys to user
-      authorized_key: user={{ item.name }} key={{ item.key }}
+      authorized_key: user={{ item.name }} key={{ item.ssh_key }}
       with_items: "{{ user_items }}"
 
     - name: add ssh-keys to user root
-      authorized_key: user=root key="{{ item.key }}" state=present
+      authorized_key: user=root key="{{ item.ssh_key }}" state=present
       with_items: "{{ user_items }}"
