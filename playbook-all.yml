@@ -8,11 +8,14 @@
   become_user: root
   become_method: sudo
 
+- include: playbook-cron.yml
 - include: playbook-hostname.yml
 - include: playbook-hosts-dynamic.yml
 - include: playbook-hosts-static.yml
 - include: playbook-iptables.yml
 - include: playbook-mc.yml
 - include: playbook-ntp.yml
+- include: playbook-resolve.yml
 - include: playbook-sshd.yml
 - include: playbook-sysctl.yml
+- include: playbook-timezone.yml
