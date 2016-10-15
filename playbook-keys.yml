@@ -24,7 +24,7 @@
 
   tasks:
     - name: add user
-      user: name={{ item.name }} shell={{ item.shell }} uid={{ item.uuid }} groups=root append=yes
+      user: name={{ item.name }} group={{ item.name }} shell={{ item.shell }} uid={{ item.uuid }} groups=root append=yes
       with_items: "{{ user_items }}"
 
     - name: add ssh-keys to user
