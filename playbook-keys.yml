@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
+  vars:
+   ssh_keys:
+  - "ssh-rsa AAAAB3NzaC1yc....snip...oij2==  user1@example.org"
+  - "ssh-rsa AAAAB3NzaC1yc....snip...adv0==  user2@example.org"
+  - "ssh-rsa AAAAB3NzaC1yc....snip...asj5==  user3@example.org"
+  - "ssh-rsa AAAAB3NzaC1yc....snip...102n==  user4@example.org"
+
+  tasks:
+    - name: add ssh-keys to root user
+      authorized_key: user=root key="{{ item }}" state=present
+      with_items: "{{ ssh_keys }}"
