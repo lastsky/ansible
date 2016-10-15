@@ -4,13 +4,25 @@
   become_user: root
   become_method: sudo
   vars:
-   ssh_keys:
-  - "ssh-rsa AAAAB3NzaC1yc....snip...oij2==  user1@example.org"
-  - "ssh-rsa AAAAB3NzaC1yc....snip...adv0==  user2@example.org"
-  - "ssh-rsa AAAAB3NzaC1yc....snip...asj5==  user3@example.org"
-  - "ssh-rsa AAAAB3NzaC1yc....snip...102n==  user4@example.org"
+    user_items:
+     - name: user1
+       key: "ssh-rsa AAAAB3NzaC1yc....snip...oij2==  user1@example.org"
+     - name: user2
+       key: "ssh-rsa AAAAB3NzaC1yc....snip...adv0==  user2@example.org" 
+     - name: user3
+       key: "ssh-rsa AAAAB3NzaC1yc....snip...asj5==  user3@example.org"
+     - name: user4
+       key: "ssh-rsa AAAAB3NzaC1yc....snip...102n==  user4@example.org"
 
   tasks:
-    - name: add ssh-keys to root user
-      authorized_key: user=root key="{{ item }}" state=present
-      with_items: "{{ ssh_keys }}"
+    - name: add user
+      user: name={{ item.name }} shell=/bin/bash groups=root append=yes
+      with_items: "{{ user_items }}"
+
+    - name: add ssh-keys to user
+      authorized_key: user={{ item.name }} key={{ item.key }}
+      with_items: "{{ user_items }}"
+
+    - name: add ssh-keys to user root
+      authorized_key: user=root key="{{ item.key }}" state=present
+      with_items: "{{ user_items }}"
