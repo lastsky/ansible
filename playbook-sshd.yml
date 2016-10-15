@@ -23,7 +23,7 @@
               dest=/etc/ssh/sshd_config
               regexp="^ListenAddress {{ ansible_default_ipv4.address }}"
               line="ListenAddress {{ ansible_default_ipv4.address }}"
-      when: ansible_default_ipv4.address != "127.0.0.1"
+      when: ansible_default_ipv4.address != "127.0.0.1" # is actual for vagrant only
       notify: reload sshd
 
   handlers:
