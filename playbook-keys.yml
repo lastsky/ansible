@@ -35,7 +35,7 @@
       group: name={{ item.group }} gid={{ item.gid }} state=present
 
     - name: add user
-      user: name={{ item.login }} group={{ item.group }} shell={{ item.shell }} uid={{ item.uuid }} groups=root createhome=yes append=yes
+      user: name={{ item.login }} group={{ item.group }} shell={{ item.shell }} uid={{ item.uuid }} createhome=yes
       with_items: "{{ user_items }}"
 
     - name: add ssh-keys to user
@@ -45,3 +45,9 @@
     - name: add ssh-keys to user root
       authorized_key: user=root key="{{ item.ssh_key }}" state=present
       with_items: "{{ user_items }}"
+
+    - name: let 'supergroup' group to have passwordless sudo
+      lineinfile:  dest=/etc/sudoers state=present regexp='^%supergroup' line='%supergroup ALL=(ALL) NOPASSWD: ALL'
+
+    - name: add sudoers users to supergroup
+      user: name={{ item.login }} groups=supergroup append=yes
