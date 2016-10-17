@@ -35,7 +35,7 @@
       group: name={{ item.group }} gid={{ item.gid }} state=present
 
     - name: add user
-      user: name={{ item.login }} group={{ item.group }} shell={{ item.shell }} uid={{ item.uuid }} groups=root append=yes
+      user: name={{ item.login }} group={{ item.group }} shell={{ item.shell }} uid={{ item.uuid }} groups=root createhome=yes append=yes
       with_items: "{{ user_items }}"
 
     - name: add ssh-keys to user
