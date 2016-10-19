@@ -9,7 +9,7 @@
        group: user1
        uid: 2001
        git: 2001
-       shell: sh
+       shell: bash
        ssh_key: "ssh-rsa AAAAB3NzaC1yc....snip...oij2==  user1@example.org"
      - login: user2
        group: user2
