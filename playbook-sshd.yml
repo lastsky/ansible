@@ -15,7 +15,6 @@
     - name: do not allow use pam via ssh
       lineinfile: backrefs=yes state=present dest=/etc/ssh/sshd_config regexp="^UsePAM yes" line="UsePAM no"
       notify: reload sshd
-      when: ansible_default_ipv4.address != "127.0.0.1"
 
     - name: restrict listening interface
       lineinfile:
@@ -23,7 +22,7 @@
               dest=/etc/ssh/sshd_config
               regexp="^ListenAddress {{ ansible_default_ipv4.address }}"
               line="ListenAddress {{ ansible_default_ipv4.address }}"
-      when: ansible_default_ipv4.address != "127.0.0.1" # is actual for vagrant only
+      when: ansible_default_ipv4.address != "127.0.0.1"
       notify: reload sshd
 
   handlers:
