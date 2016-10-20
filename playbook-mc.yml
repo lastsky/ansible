@@ -8,18 +8,13 @@
      stat: path=~/.config/mc/ini
      register: mc_ini
 
-   - name: make path for ini
-     file: path=~/.config/mc state=directory
-
-   - name: copy ini if absent
-     when: mc_ini.stat.exists == False
-     copy: src=mc.ini dest=~/.config/mc/ini
-
    - name: tune mc with your favourite settings
+     when: mc_ini.stat.exists == True
      ini_file: dest=~/.config/mc/ini no_extra_spaces=yes
                section={{ item.section }}
                option={{ item.option }}
                value={{ item.value }}
+     when: mc_ini.stat.exists == True
      with_items:
        - { section: Midnight-Commander, option: mcview_remember_file_position, value: 1 }
        - { section: Midnight-Commander, option: auto_save_setup_panels, value: 1 }
