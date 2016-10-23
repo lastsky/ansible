@@ -1,0 +1,19 @@
+# do not works yet
+- hosts: all
+  become: true
+  become_user: root
+  become_method: sudo
+
+  pre_tasks:
+    - name: install repo
+      yum: name={{ item.repo }} state=present
+      with_items:
+        - {{ repos }}
+     when: repos is defined and ansible_distribution == 'CentOS'
+
+  tasks:
+    - name: install rpm
+      yum: name={{ item.rpm }} enablerepo={{ item.repo }}  state=present
+      with_items:
+        - {{ packages }}
+     when: packages is defined and ansible_distribution == 'CentOS'
