@@ -11,3 +11,4 @@ p.s. Go to ansible-galaxy for roles. Here are examples.
 5) grafana api manage graphs
 6) zabbix api manage inventory
 7) cisco cli
+8) tc qos examples for management
