@@ -13,3 +13,4 @@ p.s. Go to ansible-galaxy for roles. Here are examples.
 7) cisco cli
 8) tc qos examples for management (or fireqos-like module)
 9) inventory generator
+10) iptables-module with nat
