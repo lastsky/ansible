@@ -4,6 +4,6 @@
   become_user: root
   become_method: sudo
 
-#  tasks:
-#   - name: Setting timezone to Moscow
-#     timezone: name=Europe/Moscow
+  tasks:
+   - name: Setting timezone to Moscow
+     timezone: name=Europe/Moscow

@@ -4,6 +4,11 @@
   become_user: root
   become_method: sudo
 
+  vars:
+   packages:
+     - "mc"
+     - "iptraf"
+
   pre_tasks:
     - name: install repo
       yum: name={{ item.repo }} state=present
