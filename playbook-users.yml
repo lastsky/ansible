@@ -4,7 +4,7 @@
   become_user: root
   become_method: sudo
   vars:
-    user_items:
+    users:
      - login: user1
        group: user1
        uid: 2001
@@ -21,21 +21,23 @@
   tasks:
     - name: add groups
       group: name={{ item.group }} gid={{ item.gid }} state=present
+      with_items: "{{ users }}"
 
     - name: add user
       user: name={{ item.login }} group={{ item.group }} shell={{ item.shell }} uid={{ item.uuid }} createhome=yes
-      with_items: "{{ user_items }}"
+      with_items: "{{ users }}"
 
     - name: add ssh-keys to user
       authorized_key: user={{ item.login }} key={{ item.ssh_key }}
-      with_items: "{{ user_items }}"
+      with_items: "{{ users }}"
 
     - name: add ssh-keys to user root
       authorized_key: user=root key="{{ item.ssh_key }}" state=present
-      with_items: "{{ user_items }}"
+      with_items: "{{ users }}"
 
     - name: let 'supergroup' group to have passwordless sudo
       lineinfile:  dest=/etc/sudoers state=present regexp='^%supergroup' line='%supergroup ALL=(ALL) NOPASSWD: ALL'
 
     - name: add sudoers users to supergroup
       user: name={{ item.login }} groups=supergroup append=yes
+      with_items: "{{ users }}"
