@@ -3,6 +3,7 @@
   become: yes
   become_user: root
   become_method: sudo
+
   tasks:
     - name: do not allow root login via ssh
       lineinfile: backrefs=yes state=present dest=/etc/ssh/sshd_config regexp="^PermitRootLogin yes" line="PermitRootLogin no"
