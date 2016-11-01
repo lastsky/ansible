@@ -35,8 +35,8 @@
       authorized_key: user=root key="{{ item.ssh_key }}" state=present
       with_items: "{{ users }}"
 
-    - name: let 'supergroup' group to have passwordless sudo
-      lineinfile:  dest=/etc/sudoers state=present regexp='^%supergroup' line='%supergroup ALL=(ALL) NOPASSWD: ALL'
+    - name: let supergroup group to have passwordless sudo
+      lineinfile: "dest=/etc/sudoers state=present regexp='^%supergroup' line='%supergroup ALL=(ALL) NOPASSWD: ALL'"
 
     - name: add sudoers users to supergroup
       user: name={{ item.login }} groups=supergroup append=yes
