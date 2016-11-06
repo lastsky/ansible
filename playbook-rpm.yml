@@ -1,24 +1,20 @@
-# do not works yet
 - hosts: all
   become: true
   become_user: root
   become_method: sudo
 
-  vars:
-   packages:
-     - "mc"
-     - "iptraf"
 
   pre_tasks:
-    - name: install repo
-      yum: name={{ item.repo }} state=present
-      with_items:
-        - {{ repos }}
-     when: repos is defined and ansible_distribution == 'CentOS'
+   - name: install epel repository
+     yum_repository:
+       name: epel
+       description: EPEL YUM repo
+       baseurl: http://download.fedoraproject.org/pub/epel/$releasever/$basearch/
 
   tasks:
     - name: install rpm
-      yum: name={{ item.rpm }} enablerepo={{ item.repo }}  state=present
+      yum: name={{ item }} state=present
       with_items:
-        - {{ packages }}
+        - rkhunter
+        - lynis
      when: packages is defined and ansible_distribution == 'CentOS'
