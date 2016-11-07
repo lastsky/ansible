@@ -5,8 +5,17 @@
   become_method: sudo
 
   tasks:
+    - name: Setting timezone to Moscow
+      timezone: name=Europe/Moscow
+
     - name: install ntpd if absent
       yum: name=ntp state=present
+      when: ansible_distribution == 'CentOS'
+
+    - name: install ntpd if absent
+      apt: name=ntp state=present
+      when: ansible_distribution == 'Ubuntu'
+
 
     - name: restrict ntpd listen addresses
       lineinfile: dest=/etc/ntp.conf regexp="{{ item.regexp }}" line="{{ item.line }}" backup=yes state=present
