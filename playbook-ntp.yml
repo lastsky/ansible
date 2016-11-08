@@ -16,7 +16,6 @@
       apt: name=ntp state=present
       when: ansible_distribution == 'Ubuntu'
 
-
     - name: restrict ntpd listen addresses
       lineinfile: dest=/etc/ntp.conf regexp="{{ item.regexp }}" line="{{ item.line }}" backup=yes state=present
       with_items:
