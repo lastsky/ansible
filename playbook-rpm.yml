@@ -17,4 +17,7 @@
       with_items:
         - rkhunter
         - lynis
+        - atop
+        - mcelog
+        - lm_sensors
      when: packages is defined and ansible_distribution == 'CentOS'
