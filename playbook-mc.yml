@@ -14,7 +14,6 @@
                section={{ item.section }}
                option={{ item.option }}
                value={{ item.value }}
-     when: mc_ini.stat.exists == True
      with_items:
        - { section: Midnight-Commander, option: mcview_remember_file_position, value: 1 }
        - { section: Midnight-Commander, option: auto_save_setup_panels, value: 1 }
