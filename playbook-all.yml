@@ -18,6 +18,10 @@
 - include: playbook-resolve.yml
 - include: playbook-sshd.yml
 - include: playbook-sysctl.yml
-- include: playbook-timezone.yml
 - include: playbook-users.yml
 
+- include: playbook-rpm.yml
+  when: ansible_distribution == "CentOS"
+
+- include: playbook-apt.yml
+  when: ansible_distribution == "Ubuntu"
