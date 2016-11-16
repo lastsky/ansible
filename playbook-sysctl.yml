@@ -3,17 +3,17 @@
   become: yes
   become_user: root
   become_method: sudo
-
-  vars:
-    sysctl_settings:
-      net.ipv4.ip_forward: 1
-      net.ipv6.conf.all.forwarding: 1
-      net.ipv4.ip_local_port_range: "1024 65000"
-      vm.swappiness: 0
+  vars_files:
+   - vars.yml
 
   tasks:
     - name: set sysctl settings
       sysctl:
         name="{{ item.key }}" value="{{ item.value }}"
         sysctl_set=yes state=present reload=yes
-      with_dict: "{{ sysctl_settings }}"
+      with_dict: "{{
+                    (sysctl_set_filesystem) | combine
+                    (sysctl_set_netcore) | combine
+                    (sysctl_set_kernel) | combine
+                    (sysctl_set_ipv4)
+                  }}"
