@@ -8,12 +8,7 @@
 
   tasks:
     - name: set sysctl settings
-      sysctl:
-        name="{{ item.key }}" value="{{ item.value }}"
-        sysctl_set=yes state=present reload=yes
-      with_dict: "{{
-                    (sysctl_set_filesystem) | combine
-                    (sysctl_set_netcore) | combine
-                    (sysctl_set_kernel) | combine
-                    (sysctl_set_ipv4)
-                  }}"
+      sysctl: sysctl_set=yes reload=yes state=present
+        name="{{ item.key }}"
+        value="{{ item.value }}"
+      with_dict: "{{ sysctl_settings }}"
