@@ -19,9 +19,4 @@
 - include: playbook-sshd.yml
 - include: playbook-sysctl.yml
 - include: playbook-users.yml
-
-- include: playbook-rpm.yml
-  when: ansible_distribution == 'CentOS' or 'Red Hat Enterprise Linux'
-
-- include: playbook-apt.yml
-  when: ansible_distribution == 'Ubuntu' or 'Debian'
+- include: playbook-package.yml

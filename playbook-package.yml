@@ -4,12 +4,11 @@
   become_method: sudo
 
   tasks:
-    - name: install apt
-      apt: name={{ item }}
+    - name: install linux package apt or rpm
+      package: name={{ item }} state=present
       with_items:
         - rkhunter
         - lynis
         - atop
         - mcelog
         - lm_sensors
-      when: packages is defined and ansible_distribution == 'Ubuntu'
