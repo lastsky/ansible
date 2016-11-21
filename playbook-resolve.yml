@@ -4,9 +4,17 @@
   become_user: root
   become_method: sudo
 
+  vars:
+    dns_google_1: "8.8.8.8"
+    dns_google_2: "8.8.4.4"
+    dns_yandex_1: "77.88.8.8"
+    dns_yandex_2: "77.88.8.1"
+
   tasks:
    - name: configure dns resolving
      lineinfile: dest=/etc/resolv.conf regexp="{{ item.regexp }}" line="{{ item.line }}" backup=yes
-     with_items:
+     with_random_choice:
        - { regexp: ^nameserver 8.8.8.8, line: "nameserver 8.8.8.8" }
-       - { regexp: ^nameserver 8.8.4.4, line: "nameserver 8.8.4.4" }
+       - { regexp: ^nameserver 8.8.8.8, line: "nameserver 8.8.8.8" }
+       - { regexp: ^nameserver 8.8.8.8, line: "nameserver 77.88.8.8" }
+       - { regexp: ^nameserver 8.8.4.4, line: "nameserver 77.88.8.1" }
