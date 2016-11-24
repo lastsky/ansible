@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: install git package
+      package: name=git
+
+    - name: clone ansible repository to server
+      git:
+        repo: 'git://github.com/ansible/ansible.git'
+        dest: '/opt/ansible'
+        update: yes
+
