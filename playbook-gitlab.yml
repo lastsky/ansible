@@ -1,0 +1,30 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+
+    - name: install or check epel-release
+      yum: name=epel-release state=present
+
+    - name: install or check pip
+      yum: name=python-pip state=present
+
+    - name: install or check pyapi-gitlab
+      pip: name=pyapi-gitlab
+
+    - name: add gitlab user
+      delegate_to: 192.168.0.200
+      action: gitlab_user
+                    server_url="http://192.168.0.200"
+                    validate_certs=true
+                    login_user="gitlab_admin_username"
+                    login_password="gitlab_admin_password"
+                    name="New Developer"
+                    username="new_developer_username"
+                    password="new_developer_password"
+                    email="developer@example.org"
+                    sshkey_name=default
+                    sshkey_file="ssh-rsa AAAAB3NzaC1yc2EAAAADAQA... developer@example.org"
+                    state=present
