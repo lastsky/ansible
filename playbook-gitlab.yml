@@ -3,6 +3,12 @@
   become: yes
   become_user: root
   become_method: sudo
+
+  vars:
+  gitlab_host: "192.168.0.200"
+  gitlab_admin_username: "username"
+  gitlab_admin_password: "password"
+
   tasks:
 
     - name: install or check epel-release
@@ -15,12 +21,12 @@
       pip: name=pyapi-gitlab
 
     - name: add gitlab user
-      delegate_to: 192.168.0.200
+      delegate_to: {{ gitlab_host }}
       action: gitlab_user
-                    server_url="http://192.168.0.200"
+                    server_url="http://{{ gitlab_host }}"
                     validate_certs=true
-                    login_user="gitlab_admin_username"
-                    login_password="gitlab_admin_password"
+                    login_user="{{ gitlab_admin_username }}"
+                    login_password="{{ gitlab_admin_password }}"
                     name="New Developer"
                     username="new_developer_username"
                     password="new_developer_password"
