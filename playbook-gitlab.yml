@@ -9,6 +9,18 @@
     gitlab_admin_username: "username"
     gitlab_admin_password: "password"
 
+    gitlab_new_users:
+     - name: "Developer One"
+       user: developer1
+       pass: changeme
+       mail: developer1@example.org
+       ssh_key: "ssh-rsa AAAAB3NzaC1yc....snip...oij2==  user1@example.org"
+     - name: "Developer Two"
+       user: developer2
+       pass: changeme
+       email: developer2@example.org
+       ssh_key: "ssh-rsa AAAAB3NzaC1yc....snip...adv0==  user2@example.org"
+
   tasks:
 
     - name: install or check epel-release
@@ -21,16 +33,17 @@
       pip: name=pyapi-gitlab
 
     - name: add gitlab user
-      delegate_to: {{ gitlab_host }}
+      delegate_to: "{{ gitlab_host }}"
       action: gitlab_user
                     server_url="http://{{ gitlab_host }}"
                     validate_certs=true
                     login_user="{{ gitlab_admin_username }}"
                     login_password="{{ gitlab_admin_password }}"
-                    name="New Developer"
-                    username="new_developer_username"
-                    password="new_developer_password"
-                    email="developer@example.org"
+                    name="{{ item.name }}"
+                    username="{{ item.user }}"
+                    password="{{ item.pass }}"
+                    email="{{ item.email }}"
                     sshkey_name=default
-                    sshkey_file="ssh-rsa AAAAB3NzaC1yc2EAAAADAQA... developer@example.org"
+                    sshkey_file="{{ item.ssh_key }}"
                     state=present
+      with_items: "{{ gitlab_new_users }}"
