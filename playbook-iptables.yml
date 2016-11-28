@@ -4,6 +4,22 @@
   become_user: root
   become_method: sudo
   tasks:
+    - name: disable firewalld for running iptables
+      service: name=firewalld enabled=false state=stopped
+      when: ansible_distribution == 'CentOS'
+
+    - name: check if iptables-services are installed
+      yum: name=iptables-services state=present
+      when: ansible_distribution == 'CentOS'
+
+    - name: disable ufw for running iptables
+      service: name=ufw enabled=false state=stopped
+      when: ansible_distribution == 'Ubuntu'
+
+    - name: check if iptables-services are installed
+      apt: name=iptables-services state=present
+      when: ansible_distribution == 'Ubuntu'
+
     - name: accept already established flows
       iptables: chain=INPUT ctstate=ESTABLISHED,RELATED comment="active flows" jump=ACCEPT
 
