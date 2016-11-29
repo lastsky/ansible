@@ -26,4 +26,4 @@
 
   handlers:
      - name: restart ntpd
-       action: service name=ntpd state=restarted enabled=true
+       service: name=ntpd state=restarted enabled=true
