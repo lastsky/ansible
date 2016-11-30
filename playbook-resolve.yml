@@ -15,6 +15,6 @@
      lineinfile: dest=/etc/resolv.conf regexp="{{ item.regexp }}" line="{{ item.line }}" backup=yes
      with_random_choice:
        - { regexp: ^nameserver 8.8.8.8, line: "nameserver 8.8.8.8" }
-       - { regexp: ^nameserver 8.8.8.8, line: "nameserver 8.8.8.8" }
-       - { regexp: ^nameserver 8.8.8.8, line: "nameserver 77.88.8.8" }
-       - { regexp: ^nameserver 8.8.4.4, line: "nameserver 77.88.8.1" }
+       - { regexp: ^nameserver 8.8.4.4, line: "nameserver 8.8.4.4" }
+       - { regexp: ^nameserver 77.88.8.8, line: "nameserver 77.88.8.8" }
+       - { regexp: ^nameserver 77.88.8.1, line: "nameserver 77.88.8.1" }
