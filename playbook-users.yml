@@ -5,39 +5,29 @@
   become_method: sudo
   vars:
     users:
-     - login: user1
-       group: user1
-       uid: 2001
-       gid: 2001
-       shell: bash
+     - login: "user1"
+       shell: "/bin/bash"
        ssh_key: "ssh-rsa AAAAB3NzaC1yc....snip...oij2==  user1@example.org"
-     - login: user2
-       group: user2
-       uid: 2002
-       gid: 2002
-       shell: bash
+     - login: "user2"
+       shell: "/bin/bash"
        ssh_key: "ssh-rsa AAAAB3NzaC1yc....snip...adv0==  user2@example.org"
 
   tasks:
-    - name: add groups
-      group: name={{ item.group }} gid={{ item.gid }} state=present
+    - name: add groups named as login
+      group: name={{ item.login }} state=present
       with_items: "{{ users }}"
 
-    - name: add user
-      user: name={{ item.login }} group={{ item.group }} shell={{ item.shell }} uid={{ item.uuid }} createhome=yes
+    - name: add users named as login
+      user: name={{ item.login }} group={{ item.login }} shell={{ item.shell }} createhome=yes
       with_items: "{{ users }}"
 
     - name: add ssh-keys to user
       authorized_key: user={{ item.login }} key={{ item.ssh_key }}
       with_items: "{{ users }}"
 
-    - name: add ssh-keys to user root
-      authorized_key: user=root key="{{ item.ssh_key }}" state=present
-      with_items: "{{ users }}"
+    - name: let {{ mycompany }} group to have passwordless sudo
+      lineinfile: "dest=/etc/sudoers state=present regexp='^%wheel' line='%wheel ALL=(ALL) NOPASSWD: ALL'"
 
-    - name: let supergroup group to have passwordless sudo
-      lineinfile: "dest=/etc/sudoers state=present regexp='^%supergroup' line='%supergroup ALL=(ALL) NOPASSWD: ALL'"
-
-    - name: add sudoers users to supergroup
-      user: name={{ item.login }} groups=supergroup append=yes
+    - name: add sudoers users to group wheel
+      user: name={{ item.login }} groups=wheel append=yes
       with_items: "{{ users }}"
