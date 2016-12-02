@@ -5,7 +5,12 @@
   become_method: sudo
   tasks:
     - name: install git package
-      package: name=git
+      apt: name=git state=present
+      when: ansible_distribution == "Ubuntu"
+
+    - name: install git package
+      yum: name=git state=present
+      when: ansible_distribution == "CentOS"
 
     - name: clone ansible repository to server
       git:
