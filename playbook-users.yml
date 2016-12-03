@@ -31,3 +31,9 @@
     - name: add sudoers users to group wheel
       user: name={{ item.login }} groups=wheel append=yes
       with_items: "{{ users }}"
+
+    - name: edit sudoers for requiretty
+      lineinfile: dest=/etc/sudoers
+                  regexp="^Defaults(\s+)(.*)requiretty(.*)"
+                  line="#Defaults\1\2requiretty\3"
+                  backrefs=yes
