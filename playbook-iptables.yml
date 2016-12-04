@@ -17,7 +17,7 @@
       when: ansible_distribution == 'Ubuntu'
 
     - name: check if iptables-services are installed
-      apt: name=iptables-services state=present
+      apt: name=iptables-persistent state=present
       when: ansible_distribution == 'Ubuntu'
 
     - name: accept already established flows
