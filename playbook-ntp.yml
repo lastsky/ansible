@@ -7,6 +7,7 @@
   tasks:
     - name: Setting timezone to Moscow
       timezone: name=Europe/Moscow
+      when: ansible_distribution == 'CentOS'
 
     - name: install ntpd if absent
       yum: name=ntp state=present
@@ -27,3 +28,11 @@
   handlers:
      - name: restart ntpd
        service: name=ntpd state=restarted enabled=true
+       when: ansible_distribution == 'CentOS'
+
+     - name: restart ntpd
+       service: name=ntp state=restarted enabled=true
+       when: ansible_distribution == 'Ubuntu'
+
+
+

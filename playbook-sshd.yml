@@ -25,3 +25,8 @@
   handlers:
     - name: reload sshd
       service: name=sshd state=restarted enabled=true
+      when: ansible_distribution == 'CentOS'
+
+    - name: reload sshd
+      service: name=ssh state=restarted enabled=true
+      when: ansible_distribution == 'Ubuntu'

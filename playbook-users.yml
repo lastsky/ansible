@@ -17,6 +17,9 @@
       group: name={{ item.login }} state=present
       with_items: "{{ users }}"
 
+    - name: add group wheel if absent
+      group: name=wheel state=present
+
     - name: add users named as login
       user: name={{ item.login }} group={{ item.login }} shell={{ item.shell }} createhome=yes
       with_items: "{{ users }}"
