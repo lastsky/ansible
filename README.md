@@ -1,5 +1,5 @@
 ## Examples playbook collection for CentOS or Ubuntu. Edit Vagrantfile to check how it works, use as you wish.
-Debug and add features. For testing in Vagrant just run: `vagrant up`
+Debug and add features.
 
 p.s. Go to ansible-galaxy for roles. Here are examples.
 
