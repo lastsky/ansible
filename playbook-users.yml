@@ -21,14 +21,14 @@
       group: name=wheel state=present
 
     - name: add users named as login
-      user: name={{ item.login }} group={{ item.login }} shell={{ item.shell }} createhome=yes
+      user: name={{ item.login }} group={{ item.login }} shell={{ item.shell }} createhome=yes state=present
       with_items: "{{ users }}"
 
     - name: add ssh-keys to user
       authorized_key: user={{ item.login }} key={{ item.ssh_key }}
       with_items: "{{ users }}"
 
-    - name: let {{ mycompany }} group to have passwordless sudo
+    - name: let wheel group to have passwordless sudo
       lineinfile: "dest=/etc/sudoers state=present regexp='^%wheel' line='%wheel ALL=(ALL) NOPASSWD: ALL'"
 
     - name: add sudoers users to group wheel
