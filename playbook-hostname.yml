@@ -5,7 +5,7 @@
   become_method: sudo
 
   vars:
-    internal_domain: []
+    internal_domain: example.org
 
   tasks:
    - name: setting hostname from inventory
