@@ -4,8 +4,7 @@
   become_user: root
   become_method: sudo
   gather_facts: yes
-  vars:
-    internal_domain: example.org
+
   tasks:
    - name: generate dynamic hosts from inventory
      lineinfile:
