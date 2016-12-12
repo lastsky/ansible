@@ -1,0 +1,32 @@
+---
+- hosts: all
+  become: true
+  become_user: root
+  become_method: sudo
+
+  vars:
+   file1_single_line: "abcdefghij1234567890"
+   file2_multi_lines: |
+     -----CUSTOM-KEY-----
+     5f9=UgdL(MiRx'1_$+P3
+     tBK.L{xHcxd{NtCy!Z&>
+     j42!n4gHF{M5OJNR#nA-
+     SAveX%C5XqLXPgVwu|+Y
+     W))rx3[>ekmUU^T`YsY2
+     {x&16)L]3TPfF]w;:vuU
+     >uOm|P_?`lq%-KXK(-CY
+     /R/#{xg`VM[BI)xDUWOm
+     *2Uy'nOhs(aRR?(cTA_p
+     J)o5qL0omq=hb`7Msj!2
+     ---------EOF--------
+
+  tasks:
+   - name: example #1 one line to file
+     copy: content="{{ file1_single_line }}" dest=/root/file1_single_line.txt
+
+   - name: example #2 many lines to file
+     copy: content="{{ file2_multi_lines }}" dest=/root/file2_multi_lines.txt
+
+   - name: example #3 inside one server
+     copy: remote_src=true src=/root/.profile dest=/tmp/.profile
+
