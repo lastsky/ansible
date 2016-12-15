@@ -30,3 +30,6 @@
    - name: example #3 inside one server
      copy: remote_src=true src=/root/.profile dest=/tmp/.profile
 
+   - name: example #4 inside one server
+     copy: remote_src=true src=/root/profile dest=/home/admin/.profile
+     delegate_to: {{ server }}
