@@ -15,4 +15,3 @@ p.s. Go to ansible-galaxy for roles. Here are examples.
 9) inventory generator
 10) iptables-module with nat
 11) rest api via url
-12) apt and ubuntu examples
