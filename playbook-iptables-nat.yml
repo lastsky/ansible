@@ -1,0 +1,20 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - include: playbook-iptables.yml
+
+    - name: vreate nat rule
+      iptables:
+        table: nat
+        chain: PREROUTING
+        in_interface: eth0
+        protocol: tcp
+        match: tcp
+        destination_port: 80
+        jump: REDIRECT
+        to_ports: 3128
+        comment: rule for redirect
+        become: yes
