@@ -1,12 +1,13 @@
 ---
+- include: playbook-iptables.yml
+
 - hosts: all
   become: yes
   become_user: root
   become_method: sudo
-  tasks:
-    - include: playbook-iptables.yml
 
-    - name: vreate nat rule
+  tasks:
+    - name: create nat rule
       iptables:
         table: nat
         chain: PREROUTING
