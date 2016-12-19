@@ -23,11 +23,11 @@
     - name: accept already established flows
       iptables: chain=INPUT ctstate=ESTABLISHED,RELATED comment="active flows" jump=ACCEPT
 
-    - name: accept new http flows
+    - name: accept new http flows for web-server
       iptables: chain=INPUT protocol=tcp match=tcp destination_port=80 comment="http access" jump=ACCEPT
 
-    - name: accept new ssh flows
+    - name: accept new ssh flows for remotely-managed server
       iptables: chain=INPUT protocol=tcp match=tcp destination_port=22 comment="ssh access" jump=ACCEPT
 
-    - name: block all other flows
+    - name: block all other flows for protection - global policy to chain
       iptables: chain=INPUT jump=DROP

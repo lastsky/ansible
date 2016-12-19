@@ -7,7 +7,7 @@
   become_method: sudo
 
   tasks:
-    - name: create nat rule
+    - name: create nat rule for squid
       iptables:
         table: nat
         chain: PREROUTING
@@ -17,5 +17,5 @@
         destination_port: 80
         jump: REDIRECT
         to_ports: 3128
-        comment: rule for redirect
+        comment: rule for redirect to squid
         become: yes
