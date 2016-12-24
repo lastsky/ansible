@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
+
+  tasks:
+    - name: install atop if absent
+      yum: name=atop state=present
+      when: when: ansible_distribution == 'CentOS'
+      notify: reload atop
+
+
+  handlers:
+    - name: reload atop
+      service: enabled=true name=atop state=restarted
