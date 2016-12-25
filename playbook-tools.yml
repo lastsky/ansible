@@ -11,6 +11,11 @@
       notify: reload atop
 
 
+    - name: install mcelog if absent
+      yum: name=mcelog state=present
+      when: when: ansible_distribution == 'CentOS'
+
+
   handlers:
     - name: reload atop
       service: enabled=true name=atop state=restarted
