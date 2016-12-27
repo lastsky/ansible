@@ -9,8 +9,7 @@ p.s. Go to ansible-galaxy for roles. Here are examples.
 3) smartos: deploy, migrate, tests
 4) qemu: deploy, migrate, tests
 5) grafana api manage dashboards
-6) zabbix api manage inventory
-7) cisco cli examples
-8) tc qos examples for management (or fireqos-like module)
-9) inventory generator
-10) iptables-module with nat
+6) cisco cli examples
+7) tc qos examples for management (or fireqos-like module)
+8) inventory generator
+9) iptables-module with nat
