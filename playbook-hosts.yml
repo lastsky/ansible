@@ -9,6 +9,14 @@
     internal_domain: example.org
 
   tasks:
+   - name: setting hostname from inventory
+     hostname: name="{{ inventory_hostname }}.{{ internal_domain }}"
+     when: internal_domain is defined
+
+   - name: setting hostname from inventory
+     hostname: name="{{ inventory_hostname }}"
+     when: internal_domain is not defined
+
    - name: generate static hosts as defined
      blockinfile:
        dest: /etc/hosts
