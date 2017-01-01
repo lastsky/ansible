@@ -31,3 +31,16 @@
 
     - name: block all other flows for protection - global policy to chain
       iptables: chain=INPUT jump=DROP
+
+    - name: create nat rule for squid
+      iptables:
+        table: nat
+        chain: PREROUTING
+        in_interface: eth0
+        protocol: tcp
+        match: tcp
+        destination_port: 80
+        jump: REDIRECT
+        to_ports: 3128
+        comment: rule for redirect to squid
+        become: yes
