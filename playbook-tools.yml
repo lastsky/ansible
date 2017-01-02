@@ -7,15 +7,28 @@
   tasks:
     - name: install atop if absent
       yum: name=atop state=present
-      when: when: ansible_distribution == 'CentOS'
-      notify: reload atop
+      when: ansible_distribution == 'CentOS'
+      notify: start atop
+
+    - name: install atop if absent
+      apt: name=atop state=present
+      when: ansible_distribution == 'Ubuntu'
+      notify: start atop
+
 
 
     - name: install mcelog if absent
       yum: name=mcelog state=present
-      when: when: ansible_distribution == 'CentOS'
+      when: ansible_distribution == 'CentOS'
+
+    - name: install mcelog if absent
+      apt: name=mcelog state=present
+      when: ansible_distribution == 'Ubuntu'
 
 
   handlers:
-    - name: reload atop
-      service: enabled=true name=atop state=restarted
+    - name: start atop
+      service: enabled=true name=atop state=started
+
+    - name: start mcelog
+      service: enabled=true name=mcelog state=started
