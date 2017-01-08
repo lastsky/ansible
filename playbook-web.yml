@@ -1,0 +1,21 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
+
+  vars:
+    web-server: apache
+
+  tasks:
+    - name: enable sites for {{ web-server }}
+      template: src=templates/etc/{{ web-server }}/sites-available/{{ item }}
+                dest=/etc/{{ web-server }}/sites-available/{{ item }}
+      with_items:
+         - mail.example.org
+         - jabber.example.org
+      notify: reload {{ web-server }}
+
+  handlers:
+    - name: reload {{ web-server }}
+      service: enabled=true name={{ web-server }} state=restarted
