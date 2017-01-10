@@ -24,7 +24,7 @@
   tasks:
 
     - name: install or check epel-release
-      yum: name=epel-release state=present
+      yum: name=epel-release state=present update_cache=yes
 
     - name: install or check pip
       yum: name=python-pip state=present
