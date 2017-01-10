@@ -12,8 +12,8 @@
       template: src=templates/etc/{{ web-server }}/sites-available/{{ item }}
                 dest=/etc/{{ web-server }}/sites-available/{{ item }}
       with_items:
-         - mail.example.org
-         - jabber.example.org
+         - mail.example.org.conf
+         - jabber.example.org.conf
       notify: reload {{ web-server }}
 
   handlers:
