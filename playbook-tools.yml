@@ -6,25 +6,20 @@
 
   tasks:
     - name: install atop if absent
-      yum: name=atop state=present
+      yum: name={{ item }} state=present
+      with_items:
+        - atop
+        - mcelog
       when: ansible_distribution == 'CentOS'
-      notify: start atop
+      notify: start {{ item }}
 
     - name: install atop if absent
-      apt: name=atop state=present
+      apt: name={{ item }} state=present
+      with_items:
+        - atop
+        - mcelog
       when: ansible_distribution == 'Ubuntu'
-      notify: start atop
-
-
-
-    - name: install mcelog if absent
-      yum: name=mcelog state=present
-      when: ansible_distribution == 'CentOS'
-
-    - name: install mcelog if absent
-      apt: name=mcelog state=present
-      when: ansible_distribution == 'Ubuntu'
-
+      notify: start {{ item }}
 
   handlers:
     - name: start atop
