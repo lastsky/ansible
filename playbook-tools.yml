@@ -1,4 +1,15 @@
 ---
+- hosts: log-collector
+  become: yes
+  become_user: root
+  become_method: sudo
+
+  tasks:
+    - name: create log directories on remote server - main
+      file: state=directory path=/var/log/remote/{{ item }}
+      with_items:
+        - "{{ groups['web-servers'] }}"
+
 - hosts: all
   become: yes
   become_user: root
