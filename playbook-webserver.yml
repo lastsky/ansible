@@ -5,9 +5,21 @@
   become_method: sudo
 
   vars:
-    web-server: apache
+    web_server: apache
 
   tasks:
+    - name: install {{ web_server }}
+      apt: name=apache2
+      when: "ansible_distribution == 'Ubuntu' and web_server == 'apache'"
+
+    - name: install {{ web_server }}
+      yum: name=httpd
+      when: "ansible_distribution == 'CentOS' and web_server == 'apache'"
+
+    - name: install {{ web_server }}
+      package: name=nginx state=present
+#      when: web-server == 'nginx'
+
     - name: enable sites for {{ web-server }}
       template: src=templates/etc/{{ web-server }}/sites-available/{{ item }}
                 dest=/etc/{{ web-server }}/sites-available/{{ item }}
