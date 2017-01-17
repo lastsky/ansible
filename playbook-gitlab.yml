@@ -5,7 +5,7 @@
   become_method: sudo
 
   vars:
-    gitlab_host: "192.168.0.200"
+    gitlab_host: "gitlab.example.org"
     gitlab_admin_username: "username"
     gitlab_admin_password: "password"
 
