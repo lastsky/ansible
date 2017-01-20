@@ -18,7 +18,7 @@
 
     - name: install {{ web_server }}
       package: name=nginx state=present
-#      when: web-server == 'nginx'
+      when: web_server == 'nginx'
 
     - name: enable sites for {{ web-server }}
       template: src=templates/etc/{{ web-server }}/sites-available/{{ item }}
