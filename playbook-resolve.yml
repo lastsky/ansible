@@ -4,14 +4,6 @@
   become_user: root
   become_method: sudo
 
-  vars:
-    dns_google_1: "8.8.8.8"
-    dns_google_2: "8.8.4.4"
-    dns_yandex_1: "77.88.8.8"
-    dns_yandex_2: "77.88.8.1"
-    dns_server_1: "208.67.222.222"
-    dns_server_2: "208.67.220.220"
-
   tasks:
    - name: configure dns resolving
      lineinfile: dest=/etc/resolv.conf regexp="{{ item.regexp }}" line="{{ item.line }}" backup=yes
