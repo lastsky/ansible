@@ -43,4 +43,3 @@
         jump: REDIRECT
         to_ports: 3128
         comment: rule for redirect to squid
-        become: yes
