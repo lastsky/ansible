@@ -30,7 +30,8 @@
         - atop
         - mcelog
       when: ansible_distribution == 'Ubuntu'
-      notify: start {{ item }}
+
+
 
   handlers:
     - name: start atop
