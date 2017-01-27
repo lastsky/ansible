@@ -8,7 +8,7 @@
     - name: create log directories on remote server - main
       file: state=directory path=/var/log/remote/{{ item }}
       with_items:
-        - "{{ groups['web-servers'] }}"
+        - "{{ groups['web_servers'] }}"
 
 - hosts: all
   become: yes
