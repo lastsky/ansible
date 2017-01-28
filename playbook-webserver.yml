@@ -6,7 +6,9 @@
 
   vars:
     web_server: apache2
-
+  # web_server: nginx
+  # web_Server: httpd2
+ 
   tasks:
     - name: install {{ web_server }}
       package: name={{ web_server }}
