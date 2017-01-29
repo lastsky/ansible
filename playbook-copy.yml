@@ -27,9 +27,9 @@
    - name: example #2 many lines to file
      copy: content="{{ file2_multi_lines }}" dest=/root/file2_multi_lines.txt
 
-   - name: example #3 inside one server
+   - name: example #3 inside one server within plays
      copy: remote_src=true src=/root/.profile dest=/tmp/.profile
 
-   - name: example #4 inside one server
+   - name: example #4 inside one server at separate play
      copy: remote_src=true src=/root/profile dest=/home/admin/.profile
      delegate_to: {{ server }}
