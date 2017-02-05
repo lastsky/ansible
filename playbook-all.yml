@@ -6,6 +6,7 @@
   become_method: sudo
 
 - include: playbook-cron.yml
+- include: playbook-git.yml
 - include: playbook-hosts.yml
 - include: playbook-iptables.yml
 - include: playbook-ntp.yml
