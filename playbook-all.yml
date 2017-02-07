@@ -12,6 +12,7 @@
 - include: playbook-ntp.yml
 - include: playbook-resolve.yml
 - include: playbook-sshd.yml
+- include: playbook-selinux.yml
 - include: playbook-sysctl.yml
 - include: playbook-tools.yml
 - include: playbook-users.yml
