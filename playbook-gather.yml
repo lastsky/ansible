@@ -1,0 +1,18 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+
+  vars:
+    var1: ok
+    var2: fake
+
+  pre_tasks: []
+
+  tasks:
+
+  - name: get facts
+    action: setup
+
+  - debug:
+     var: hostvars[inventory_hostname]
