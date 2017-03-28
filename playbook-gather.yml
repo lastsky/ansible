@@ -10,5 +10,6 @@
   - name: gather facts with silent action
     action: setup
 
-  - debug:
+  - name: debug facts to stdout
+    debug:
      var: hostvars[inventory_hostname]
