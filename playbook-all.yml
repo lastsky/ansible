@@ -1,4 +1,5 @@
 #TODO: hosts - {{ item }} with {{ internal_domain }} is not idempotent
+#TODO: playbook for bind
 ---
 - hosts: all
   become: true
