@@ -1,5 +1,7 @@
 #TODO: hosts - {{ item }} with {{ internal_domain }} is not idempotent
 #TODO: playbook for bind
+#TODO: playbook for nginx configs with_fileglob copy and links
+
 ---
 - hosts: all
   become: true
