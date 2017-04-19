@@ -33,3 +33,10 @@
    - name: example #4 inside one server at separate play
      copy: remote_src=true src=/root/profile dest=/home/admin/.profile
      delegate_to: {{ server }}
+
+   - name: example #5 inside one server folder to folder and list
+     synchronize: src={{ item.src }} dest={{ item.dest }}
+     delegate_to: "{{ ansible_host }}"
+     with_items:
+       - { src: '/foler/from/1/', dest: '/folder/to/1/' }
+       - { src: '/foler/from/2/', dest: '/folder/to/2/' }
