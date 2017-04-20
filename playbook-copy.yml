@@ -40,3 +40,6 @@
      with_items:
        - { src: '/foler/from/1/', dest: '/folder/to/1/' }
        - { src: '/foler/from/2/', dest: '/folder/to/2/' }
+
+
+#TODO: example #6 - find + copy results
