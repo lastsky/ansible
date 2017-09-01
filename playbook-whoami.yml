@@ -1,0 +1,10 @@
+---
+- hosts: all
+  tasks:
+   - name: check self id
+     shell: id
+     changed_when: false
+     register: whoami
+
+   - name: display self id
+     debug: var=whoami.stdout_lines
